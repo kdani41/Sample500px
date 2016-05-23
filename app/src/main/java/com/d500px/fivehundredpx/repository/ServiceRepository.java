@@ -24,7 +24,8 @@ public interface ServiceRepository {
      * Interface of the api responsible for performing the get request
      */
     interface FiveHundredPxApi {
-        @GET(Constants.PHOTOS_ENDPOINT_PATH + Constants.PHOTOS_EXCLUDE + BuildConfig.API_KEY)
+        @GET(Constants.PHOTOS_ENDPOINT_PATH + Constants.PHOTOS_EXCLUDE +
+                Constants.PHOTOS_CONSUMER_KEY + BuildConfig.API_KEY)
         Observable<PhotoResponse> fetchPhotos(@Query(Constants.IMAGE_SIZE) String imageSize,
                                               @Query(Constants.PAGE) int page);
     }

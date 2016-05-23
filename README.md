@@ -11,7 +11,7 @@
 </p>
 
 ## Requirements
-* Replace your consumer key in [secret.properties](/app/secret.properties)
+* Add your consumer key by creating a file _secret.properties_ under app directory. File should be like _API_KEY=YOUR_API_KEY_
 * You can get an API consumer key here: [500px Consumer Key](https://500px.com/settings/applications)
 * You’ll first need to log in with your 500px account. Please create a 500px account if you don’t yet have one.
 
