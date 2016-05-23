@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">500px Api</string>
+    <string name="action_about_me">About</string>
+    <string name="about_me_text">&lt;a href="http://kdani.com"> Kartikay Dani&lt;/a> &lt;br
+        /&gt;&lt;br
+        /&gt; Version %1$s
+    </string>
+    <string name="no_internet_connection">No internet connection!</string>
+    <string name="action_dismiss">Dismiss</string>
+    <string name="action_try_again">Try again</string>
+</resources>

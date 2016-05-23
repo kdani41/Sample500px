@@ -1,0 +1,113 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
+
+def gitTag = 'git describe --tags'.execute([], project.rootDir).text.trim()
+def gitCommitCount = 100 + Integer.parseInt(
+        'git rev-list --count HEAD'.execute([], project.rootDir).text.trim())
+
+def getApiKey() {
+    def apiKeyFile = file('secret.properties')
+    if (apiKeyFile.canRead()) {
+        def Properties props = new Properties()
+        props.load(new FileInputStream(apiKeyFile))
+        return props['API_KEY']
+    } else {
+        throw new GradleException("Missing api key. Could not read from secret.properties!")
+    }
+}
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        applicationId "com.d500px.fivehundredpx"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode gitCommitCount
+        versionName gitTag
+        testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
+    }
+
+    buildTypes {
+        debug {
+            applicationIdSuffix ".d"
+            versionNameSuffix "-debug"
+        }
+
+        applicationVariants.all {
+            variant -> variant.buildConfigField "String", "API_KEY", "\"" + getApiKey() + "\""
+        }
+
+        applicationVariants.all { variant ->
+            variant.outputs.each { output ->
+                output.outputFile = new File(output.outputFile.parent,
+                        output.outputFile.name.replace(".apk", "-${variant.versionName}.apk"))
+            }
+        }
+    }
+    // Always show the result of every unit test, even if it passes.
+    testOptions.unitTests.all {
+        testLogging {
+            events 'passed', 'skipped', 'failed', 'standardOut', 'standardError'
+        }
+    }
+}
+
+dependencies {
+    //App dependencies
+    debugCompile "com.squareup.leakcanary:leakcanary-android:$rootProject.leakCanaryVersion"
+    releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$rootProject.leakCanaryVersion"
+    testCompile "com.squareup.leakcanary:leakcanary-android-no-op:$rootProject.leakCanaryVersion"
+
+    compile "com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion"
+    compile "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
+    compile "com.android.support:design:$rootProject.supportLibraryVersion"
+    compile "com.android.support.test.espresso:espresso-idling-resource:$rootProject.espressoVersion"
+
+    compile "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
+    compile "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion"
+    compile "com.squareup.retrofit2:adapter-rxjava:$rootProject.retrofitVersion"
+
+    compile "com.google.guava:guava:$rootProject.guavaVersion"
+    compile "io.reactivex:rxandroid:$rootProject.rxjavaVersion"
+    compile "com.artemzin.rxjava:proguard-rules:$rootProject.rxProguardVersion"
+
+    compile "io.reactivex:rxjava:$rootProject.rxjavaVersion"
+    compile "com.jakewharton:butterknife:$rootProject.butterKnifeVersion"
+    apt "com.google.dagger:dagger-compiler:$rootProject.daggerCompilerVersion"
+    compile "com.google.dagger:dagger:$rootProject.daggerVersion"
+    provided "org.glassfish:javax.annotation:$rootProject.annotationVersion"
+    compile "com.squareup.picasso:picasso:$rootProject.picassoVersion"
+    compile "com.squareup.okhttp:okhttp:$rootProject.okhttpVersion"
+
+    // Dependencies for local unit tests
+    testCompile "junit:junit:$rootProject.ext.junitVersion"
+    testCompile "org.mockito:mockito-all:$rootProject.ext.mockitoVersion"
+    testCompile "org.hamcrest:hamcrest-all:$rootProject.ext.hamcrestVersion"
+
+    // Android Testing Support Library's runner and rules
+    androidTestCompile "com.android.support.test:runner:$rootProject.ext.runnerVersion"
+    androidTestCompile "com.android.support.test:rules:$rootProject.ext.runnerVersion"
+
+    // Dependencies for Android unit tests
+    androidTestCompile "junit:junit:$rootProject.ext.junitVersion"
+    androidTestCompile "org.mockito:mockito-core:$rootProject.ext.mockitoVersion"
+    androidTestCompile "com.google.dexmaker:dexmaker:$rootProject.ext.dexVersion"
+    androidTestCompile "com.google.dexmaker:dexmaker-mockito:$rootProject.ext.dexVersion"
+
+    // Espresso UI Testing
+    androidTestCompile "com.android.support.test.espresso:espresso-core:$rootProject.espressoVersion"
+    androidTestCompile(
+            "com.android.support.test.espresso:espresso-contrib:$rootProject.espressoVersion")
+    androidTestCompile "com.android.support.test.espresso:espresso-intents:$rootProject.espressoVersion"
+
+    // Resolve conflicts between main and test APK:
+    androidTestCompile "com.android.support:support-annotations:$rootProject.supportLibraryVersion"
+    androidTestCompile "com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion"
+
+    // Asserts Truth
+    androidTestCompile("com.google.truth:truth:$rootProject.truthVersion") {
+        exclude group: 'junit' // Android has JUnit built in.
+    }
+}
