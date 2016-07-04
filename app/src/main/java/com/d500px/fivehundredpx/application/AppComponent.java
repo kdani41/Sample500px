@@ -1,6 +1,5 @@
 package com.d500px.fivehundredpx.application;
 
-import com.d500px.fivehundredpx.di.component.DaggerAppComponent;
 import com.d500px.fivehundredpx.repository.PhotoData;
 import com.d500px.fivehundredpx.repository.ServiceRepository;
 import com.d500px.fivehundredpx.repository.ServiceRepositoryImpl;
