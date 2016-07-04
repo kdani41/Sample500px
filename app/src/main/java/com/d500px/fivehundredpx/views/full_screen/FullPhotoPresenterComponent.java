@@ -1,7 +1,7 @@
 package com.d500px.fivehundredpx.views.full_screen;
 
-import com.d500px.fivehundredpx.di.component.AppComponent;
-import com.d500px.fivehundredpx.di.scope.FragmentScoped;
+import com.d500px.fivehundredpx.application.AppComponent;
+import com.d500px.fivehundredpx.application.scope.FragmentScoped;
 
 import dagger.Component;
 

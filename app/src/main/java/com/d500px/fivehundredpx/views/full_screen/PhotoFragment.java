@@ -9,7 +9,6 @@ import com.squareup.picasso.Picasso;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.view.ViewCompat;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -24,8 +23,7 @@ public class PhotoFragment extends BaseFragment {
 
     private static final String ARGUMENT_FULL_PHOTO_URL = "FULL_PHOTO_URL";
     private static final String TAG = PhotoFragment.class.getSimpleName();
-    @Bind(R.id.photo_full)
-    ImageView mPhotoFull;
+    @Bind(R.id.photo_full) ImageView mPhotoFull;
 
     private String mFullPhotoUrl;
 

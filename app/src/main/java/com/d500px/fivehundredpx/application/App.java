@@ -1,6 +1,6 @@
-package com.d500px.fivehundredpx;
+package com.d500px.fivehundredpx.application;
 
-import com.d500px.fivehundredpx.di.component.AppComponent;
+import com.d500px.fivehundredpx.BuildConfig;
 import com.squareup.picasso.OkHttpDownloader;
 import com.squareup.picasso.Picasso;
 

@@ -1,7 +1,7 @@
 package com.d500px.fivehundredpx.views.full_screen;
 
-import com.d500px.fivehundredpx.App;
 import com.d500px.fivehundredpx.R;
+import com.d500px.fivehundredpx.application.App;
 import com.d500px.fivehundredpx.utils.ActivityUtils;
 import com.d500px.fivehundredpx.views.base.BaseActivity;
 
@@ -22,8 +22,7 @@ public class FullPhotoScreenActivity extends BaseActivity {
     private static final String TAG = FullPhotoScreenActivity.class.getSimpleName();
     private static final String PAGER_POSITION = TAG + ".PAGER_POSITION";
 
-    @Bind(R.id.toolbar)
-    Toolbar mToolbar;
+    @Bind(R.id.toolbar) Toolbar mToolbar;
 
     public static Intent getStartIntent(Context context, int position) {
         Intent starter = new Intent(context, FullPhotoScreenActivity.class);

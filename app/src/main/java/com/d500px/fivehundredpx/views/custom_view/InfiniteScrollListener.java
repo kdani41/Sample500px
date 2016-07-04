@@ -12,9 +12,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * Adapted from {@link <a href="https://gist.github.com/ssinss/e06f12ef66c51252563e" />}
  */
 public abstract class InfiniteScrollListener extends RecyclerView.OnScrollListener {
-    public static String TAG = InfiniteScrollListener.class.getSimpleName();
-
     private static final int THRESHOLD = 3;
+    public static String TAG = InfiniteScrollListener.class.getSimpleName();
     private boolean mLoading = true;
     private int mPreviousTotal = 0;
     private CustomGridLayoutManager mLayoutManager;

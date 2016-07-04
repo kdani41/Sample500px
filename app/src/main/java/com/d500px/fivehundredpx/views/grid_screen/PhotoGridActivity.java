@@ -1,8 +1,8 @@
 package com.d500px.fivehundredpx.views.grid_screen;
 
-import com.d500px.fivehundredpx.App;
 import com.d500px.fivehundredpx.BuildConfig;
 import com.d500px.fivehundredpx.R;
+import com.d500px.fivehundredpx.application.App;
 import com.d500px.fivehundredpx.utils.ActivityUtils;
 import com.d500px.fivehundredpx.views.base.BaseActivity;
 

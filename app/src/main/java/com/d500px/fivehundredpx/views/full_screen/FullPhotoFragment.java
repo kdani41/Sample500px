@@ -33,12 +33,9 @@ public class FullPhotoFragment extends BaseFragment implements FullPhotoContract
     private static final String ARGUMENT_PAGER_POSITION = "PAGER_POSITION";
     private static final String TAG = FullPhotoFragment.class.getSimpleName();
 
-    @Bind(R.id.pager)
-    ViewPager mPager;
-    @Bind(android.R.id.progress)
-    ProgressBar mProgressBar;
-    @Bind(R.id.insideFrame)
-    FrameLayout mInsideFrameLayout;
+    @Bind(R.id.pager) ViewPager mPager;
+    @Bind(android.R.id.progress) ProgressBar mProgressBar;
+    @Bind(R.id.insideFrame) FrameLayout mInsideFrameLayout;
 
     private FullPhotoContract.Presenter mPresenter;
     private PhotoScreenAdapter mAdapter;
